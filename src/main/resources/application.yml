@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: pixao-api
+  datasource:
+    url: jdbc:mysql://localhost:3306/pixao_db
+    username: pixao
+    password: qwer1234!@
+  data:
+    redis:
+#      host: ${AWS_ELASTIC_CACHE_HOST}
+      host: localhost
+#      port: ${AWS_ELASTIC_CACHE_PORT}
+      port: 6379
+
+cloud:
+  aws:
+    s3:
+      bucket: ${AWS_S3_BUCKET}
+    region:
+      static: ${AWS_S3_REGION}
+    stack:
+      auto: false
+    credentials:
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}

@@ -1,0 +1,31 @@
+services:
+  mysql:
+    container_name: pixao-mysql
+    image: mysql:8.0
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "qwer1234!@"
+      MYSQL_DATABASE: "pixao_db"
+      MYSQL_USER: "pixao"
+      MYSQL_PASSWORD: "qwer1234!@"
+      TZ: Asia/Seoul
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./data/mysql/:/var/lib/mysql
+
+  redis:
+    container_name: pixao-redis
+    image: redis:alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory 1GB --maxmemory-policy allkeys-lru
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
